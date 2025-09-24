@@ -1,11 +1,21 @@
 import pyodbc # Importamos la librería pyodbc que permite conectarse y operar con bases de datos ODBC en Python.
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Cargar las variables de entorno desde el archivo .env
 
 class conexion: # Definimos una clase llamada Conexion que encapsula toda la funcionalidad relacionada con la conexión a la bd.
     def __init__(self):
+
+        driver = os.getenv("DRIVER")
+        server = os.getenv("Server")
+        database = os.getenv("Database")
+
+
         #cadena de conexion
-        self.cadena_conexion = '''DRIVER={SQL SERVER};
-                                  Server=Go-8ZG6503\\MSSSQLSERVER_DEV;
-                                  Database=Sistema_Bibliotecario;
+        self.cadena_conexion = f'''DRIVER={driver};
+                                  Server={server};
+                                  Database={database};
                                   Trusted_Connection=yes;'''
         self.conn = None
         self.cursor = None
